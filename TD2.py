@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jan 29 16:23:44 2021
-
-@author: Quentin
-"""
 import secrets
 import bip39gen
 import hashlib
@@ -32,6 +26,7 @@ def bip39(seed=[]):
         resSeed = 'La seed binaire est : ' + ''.join(msi)[:-4]
         resMnemo = 'La seed mnemonic est : ' + ' '.join(msm)
         return resMnemo + '\n' + resSeed + '\n' + 'La checksum est : ' + checkSum
+
     else:  # cas ou on importe une seed
         wordlist = bip39gen.words()  # on génère la wordlist bip 39 en anglais
         temp = []
