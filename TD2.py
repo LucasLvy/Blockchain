@@ -77,10 +77,10 @@ def bip32_standard(seed):
     child_resultat = hmac.new(
         bitstring_to_bytes(mcc),
         msg= bitstring_to_bytes(data),
-        digestmod=hashlib.sha256
+        digestmod=hashlib.sha512
         ).hexdigest()
     
-    # on a : child[depth] = [privatekey, chaincode, index]
+    # on a : child = [privatekey, chaincode, index]
     child_resultat = hexToBin(child_resultat)
     child_resultat_prk = int(child_resultat[:int(len(child_resultat)/2)],2) + int(mprk,2)
     child = [
@@ -109,10 +109,10 @@ def bip32_index(seed, index):
     child_resultat = hmac.new(
         bitstring_to_bytes(mcc),
         msg= bitstring_to_bytes(data),
-        digestmod=hashlib.sha256
+        digestmod=hashlib.sha512
         ).hexdigest()
     
-    # on a : child[depth] = [privatekey, chaincode, index]
+    # on a : child = [privatekey, chaincode, index]
     child_resultat = hexToBin(child_resultat)
     child_resultat_prk = int(child_resultat[:int(len(child_resultat)/2)],2) + int(mprk,2)
     child = [
@@ -144,7 +144,7 @@ def bip32_index_depth(seed, index, depth):
     child_resultat = hmac.new(
         bitstring_to_bytes(mcc),
         msg= bitstring_to_bytes(data),
-        digestmod=hashlib.sha256
+        digestmod=hashlib.sha512
         ).hexdigest()
     
     
@@ -166,7 +166,7 @@ def bip32_index_depth(seed, index, depth):
             child_resultat = hmac.new(
                 bitstring_to_bytes(child[m][1]),
                 msg= bitstring_to_bytes(data),
-                digestmod=hashlib.sha256
+                digestmod=hashlib.sha512
                 ).hexdigest()
             
             # on a : child[depth] = [privatekey, chaincode, index]
@@ -183,7 +183,7 @@ def bip32_index_depth(seed, index, depth):
             child_resultat = hmac.new(
                 bitstring_to_bytes(child[m][1]),
                 msg= bitstring_to_bytes(data),
-                digestmod=hashlib.sha256
+                digestmod=hashlib.sha512
                 ).hexdigest()
             
             # on a : child[depth] = [privatekey, chaincode, index]
