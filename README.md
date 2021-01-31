@@ -32,3 +32,11 @@ Nous avons décomposé cette partie en 3 fonctions c.à.d 3 manières différent
 * `bip32_index` prend en entrée la seed et l'index voulu pour l'enfant sous forme d'entier int. Par souci de simplicité, on transforme nous même l'index en un index valable pour une clé renforcée en ajoutant systématiquement 2^31 au nombre entré. Le reste de la dérivation a le même fonctionnement que pour le `bip32_standard`, l'index a seulement été prédéfini. La fonction retourne un tableau avec les résultats de l'enfant généré sous cette forme : `child = [privatekey, chaincode, index]`.
 
 * `bip32_index_depth` prend en entrée la seed, l'index et le niveau de dérivation voulu pour l'enfant sous forme d'entier int. Le reste de la dérivation a le même fonctionnement que pour le `bip32_standard`, seulement cette fois on réalise cette derivation autant de fois que de profondeur défini. A chaque niveau, le parent est le child du niveau précedent (ou la master key au niveau 0). De plus, on utilise un index qui s'itère sur lui même pour chaque niveau. Lorsque l'on atteint le niveau désiré en entrée, on applique l'index également choisi en entrée. La fonction retourne un tableau avec les résultats des enfants générés sous cette forme : `child[depth] = [privatekey, chaincode, index]`.
+
+
+## Librairies utilisées :
+* Secrets : pour générer l'entier aléatoire sur 128 bits
+* bip39gen : pour générer automatiquement la wordlist dans un tableau de string
+* hashlib : pour les différents hash
+* hmac : pour les dérivations de clés
+* binascii : pour des conversions
