@@ -31,7 +31,7 @@ def bip39(seed=[]):
             msm.append(wordlist[int(i, 2)])  # on rajoute chaque mot correspondant à chaque paquet de 11 bits
         resSeed = 'La seed binaire est : ' + ''.join(msi)[:-4]
         resMnemo = 'La seed mnemonic est : ' + ' '.join(msm)
-        return resMnemo, resSeed, 'La checksum est : ' + checkSum
+        return resMnemo + '\n' + resSeed + '\n' + 'La checksum est : ' + checkSum
     else:  # cas ou on importe une seed
         wordlist = bip39gen.words()  # on génère la wordlist bip 39 en anglais
         temp = []
@@ -50,7 +50,7 @@ def bip39(seed=[]):
                    2:]  # on convertit en binaire le premier chiffre du hash pour avoir la checksum
         checkSum = checkSum.zfill(4)  # on pad la checksum si nécessaire
         test = checkSum == seedCheckSum[-4:]  # verification de la checksum
-        return 'La seed en binaire est : '+ ''.join(msi), ' Cette seed est correcte : ' + str(test)
+        return 'La seed en binaire est : '+ ''.join(msi) +'\n' + ' Cette seed est correcte : ' + str(test)
         
         
 #--------- Fonctions de transformation ----------
@@ -237,19 +237,20 @@ def bip32_index_depth(seed, index, depth):
 
 
 #------------------ MAIN -------------------
-print('----------------- BIP 39 -----------------\n \n')
-print('On va générer une seed')
+print('\n \n ----------------- BIP 39 -----------------\n \n')
+print("1) Génération d'une seed \n")
 print(bip39())
 print('\n \n \n')
 seed= ''.split(sep=' ')
-print('On vérifie si la seed : train idea soldier protect stamp clump plastic disagree stage humor solution icon \n est correcte' )
-print(bip39(['train', 'idea', 'soldier', 'protect', 'stamp', 'clump', 'plastic' ,'disagree', 'stage', 'humor', 'solution', 'icon']))
+print("2) Import d'une seed \n"
+      "\n On verifie si la seed : 'train idea soldier protect stamp clump plastic disagree stage humor solution icon'  est correcte" )
+print(bip39(['train', 'idea', 'soldier', 'protect', 'stamp', 'clump', 'plastic', 'disagree', 'stage', 'humor', 'solution', 'icon']))
 print('\n \n')
 
 print('----------------- BIP 32 -----------------\n')
-seed = b'10111101001111110101001100000011001001100110101001100111100111000011010100101100110010101100110101011111101010001111001000000101101110011001000011110110011001111111101110010001011010010111111011000100010101101001010101100010000110111010110000000000101001000100000000100101100000101000011100101000110110000100111011011101001000110010001101111111000101110010100011011010100001101001010011100111110010101010011101001110000111100000011111110001010101110100000100001010101101011000100101010001100000001110011111001110'
+seed = b'01000111100111000010101100111111000111000101001011101010001110101100000011010001101110100011110101010101000010001010111111110100'
 print('Dans cette partie on utilise la seed suivante :')
-print('bd3f5303266a679c352ccacd5fa8f205b990f667fb91697ec45695621bac00a44025828728d84edd23237f1728da8694e7caa74e1e07f157410ab5895180e7ce')
+print('479c2b3f1c52ea3ac0d1ba3d5508aff4')
 
 print('\n1) Générer une clé enfant :')
 bip32_standard(seed)
